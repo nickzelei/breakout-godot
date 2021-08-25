@@ -11,6 +11,8 @@ func _ready():
 var _ball_dir = 1
 
 func _on_Brick_area_entered(area):
+	$CollisionSound.play()
 	if area.name == "Ball":
 		area.direction = Vector2(randf() * 2 -1, _ball_dir).normalized()
+		yield($CollisionSound, 'finished')
 		queue_free()

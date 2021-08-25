@@ -16,5 +16,6 @@ func _process(delta):
 
 
 func _on_Paddle_area_entered(area):
+	$PaddleSound.play()
 	if area.name == "Ball":
 		area.direction = Vector2(randf() * 2 -1, _ball_dir).normalized()
