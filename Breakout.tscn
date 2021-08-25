@@ -1,0 +1,99 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/paddle.png" type="Texture" id=1]
+[ext_resource path="res://assets/ball.png" type="Texture" id=2]
+[ext_resource path="res://paddle.gd" type="Script" id=3]
+[ext_resource path="res://ball.gd" type="Script" id=4]
+[ext_resource path="res://left_right_walls.gd" type="Script" id=5]
+[ext_resource path="res://ceiling.gd" type="Script" id=6]
+[ext_resource path="res://floor.gd" type="Script" id=7]
+[ext_resource path="res://main.gd" type="Script" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4.35448, 15.9112 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4.38796, 4.12894 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 300 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 300 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 10, 540 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 540, 10 )
+
+[node name="Breakout" type="Node2D"]
+script = ExtResource( 8 )
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1025.0
+margin_bottom = 600.0
+color = Color( 0.141176, 0.152941, 0.164706, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Paddle" type="Area2D" parent="."]
+position = Vector2( 500, 550 )
+rotation = 1.5708
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Paddle"]
+texture = ExtResource( 1 )
+
+[node name="Collision" type="CollisionShape2D" parent="Paddle"]
+shape = SubResource( 1 )
+
+[node name="Ball" type="Area2D" parent="."]
+position = Vector2( 500, 300 )
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="Ball"]
+texture = ExtResource( 2 )
+
+[node name="Collision" type="CollisionShape2D" parent="Ball"]
+shape = SubResource( 2 )
+
+[node name="LeftWall" type="Area2D" parent="."]
+position = Vector2( -10, 300 )
+script = ExtResource( 5 )
+
+[node name="Collision" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource( 3 )
+
+[node name="RightWall" type="Area2D" parent="."]
+position = Vector2( 1035, 300 )
+script = ExtResource( 5 )
+
+[node name="Collision" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource( 4 )
+
+[node name="Ceiling" type="Area2D" parent="."]
+position = Vector2( 520, -10 )
+rotation = 1.5708
+script = ExtResource( 6 )
+
+[node name="Collision" type="CollisionShape2D" parent="Ceiling"]
+shape = SubResource( 5 )
+
+[node name="Floor" type="Area2D" parent="."]
+position = Vector2( 540, 610 )
+script = ExtResource( 7 )
+
+[node name="Collision" type="CollisionShape2D" parent="Floor"]
+shape = SubResource( 6 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 515, 300 )
+current = true
+
+[connection signal="area_entered" from="Paddle" to="Paddle" method="_on_Paddle_area_entered"]
+[connection signal="area_entered" from="LeftWall" to="LeftWall" method="_on_wall_area_entered"]
+[connection signal="area_entered" from="RightWall" to="RightWall" method="_on_wall_area_entered"]
+[connection signal="area_entered" from="Ceiling" to="Ceiling" method="_on_wall_area_entered"]
+[connection signal="area_entered" from="Floor" to="Floor" method="_on_Floor_area_entered"]

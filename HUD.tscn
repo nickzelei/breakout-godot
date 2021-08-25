@@ -1,0 +1,15 @@
+[gd_scene format=2]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Message" type="Label" parent="."]
+margin_left = 78.0
+margin_top = 112.0
+margin_right = 167.0
+margin_bottom = 131.0
+text = "Breakout!"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
