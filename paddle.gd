@@ -1,6 +1,6 @@
 extends Area2D
 
-const MOVE_SPEED = 400
+const MOVE_SPEED = 500
 
 var _ball_dir = -1
 
@@ -16,6 +16,6 @@ func _process(delta):
 
 
 func _on_Paddle_area_entered(area):
-	$PaddleSound.play()
 	if area.name == "Ball":
+		$PaddleSound.play() 
 		area.direction = Vector2(randf() * 2 -1, _ball_dir).normalized()
